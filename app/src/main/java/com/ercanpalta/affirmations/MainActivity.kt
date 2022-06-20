@@ -2,6 +2,9 @@ package com.ercanpalta.affirmations
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.RecyclerView
+import com.ercanpalta.affirmations.adapter.ItemAdapter
+import com.ercanpalta.affirmations.data.Datasource
 
 
 class MainActivity : AppCompatActivity() {
@@ -9,5 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize data.
+        val myDataset = Datasource().loadAffirmations()
+
+        // Find recylerview and assign the ItemAdapter as adapter
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.adapter = ItemAdapter(this, myDataset)
+        
+        recyclerView.setHasFixedSize(true)
     }
 }
